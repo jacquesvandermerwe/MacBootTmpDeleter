@@ -15,10 +15,16 @@ on run
 				-- Delete each file
 				repeat with aFile in fileList
 					try
+						set fileName to name of aFile
 						delete aFile
-						log "Deleted: " & (name of aFile)
+						log "Deleted: " & fileName
 					on error errMsg
-						log "Error deleting " & (name of aFile) & ": " & errMsg
+						try
+							set fileName to name of aFile
+						on error
+							set fileName to "unknown file"
+						end try
+						log "Error deleting " & fileName & ": " & errMsg
 					end try
 				end repeat
 				
@@ -26,10 +32,16 @@ on run
 				set folderList to every folder of folder tmpFolderPath
 				repeat with aFolder in folderList
 					try
+						set folderName to name of aFolder
 						delete aFolder
-						log "Deleted folder: " & (name of aFolder)
+						log "Deleted folder: " & folderName
 					on error errMsg
-						log "Error deleting folder " & (name of aFolder) & ": " & errMsg
+						try
+							set folderName to name of aFolder
+						on error
+							set folderName to "unknown folder"
+						end try
+						log "Error deleting folder " & folderName & ": " & errMsg
 					end try
 				end repeat
 				
