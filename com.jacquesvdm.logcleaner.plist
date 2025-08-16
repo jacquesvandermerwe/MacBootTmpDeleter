@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.jacquesvdm.logcleaner</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/bin/osascript</string>
+		<string>/Users/jacquesvandermerwe/Documents/eclipse_workspace/MacBootTmpDeleter/LogCleaner.applescript</string>
+	</array>
+	<key>StartInterval</key>
+	<integer>604800</integer>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<false/>
+</dict>
+</plist>
