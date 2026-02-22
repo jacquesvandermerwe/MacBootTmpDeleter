@@ -23,6 +23,10 @@ cp "$PROJECT_DIR/LogCleaner.applescript" "$APP_SUPPORT_DIR/"
 cp "$PROJECT_DIR/$TEMP_PLIST" "$LAUNCH_AGENTS_DIR/"
 cp "$PROJECT_DIR/$LOG_PLIST" "$LAUNCH_AGENTS_DIR/"
 
+# Unload first if already loaded to avoid "Input/output error 5"
+launchctl unload "$LAUNCH_AGENTS_DIR/$TEMP_PLIST" 2>/dev/null
+launchctl unload "$LAUNCH_AGENTS_DIR/$LOG_PLIST" 2>/dev/null
+
 # Load both launch agents
 launchctl load "$LAUNCH_AGENTS_DIR/$TEMP_PLIST"
 launchctl load "$LAUNCH_AGENTS_DIR/$LOG_PLIST"
