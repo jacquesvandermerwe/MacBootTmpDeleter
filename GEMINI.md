@@ -17,6 +17,39 @@ This file provides foundational mandates and guidance for Gemini CLI when workin
 - `install.sh` - Installation script (handles unloading, copying to App Support, and loading).
 - `uninstall.sh` - Uninstallation script (handles unloading and removal of all artifacts).
 
+## System Architecture
+
+```mermaid
+graph TD
+    subgraph "Triggers (via launchd)"
+        Login([User Login]) --> |Runs at Load| Agent1[com.jacquesvdm.tempfiledeleter.plist]
+        Weekly([7-Day Interval]) --> |Scheduled| Agent2[com.jacquesvdm.logcleaner.plist]
+    end
+
+    subgraph "Temp File Cleanup Flow"
+        Agent1 --> |Executes| AS1[TempFileDeleter.applescript]
+        AS1 --> Path1{Check Folder Path}
+        Path1 --> |Downloads/_tmp_folder| Shell1[do shell script: rm -rf contents]
+        Shell1 --> Notify1[Display macOS Notification]
+        
+        %% Logging captured by launchd
+        AS1 -.-> |Stdout| LogFile[~/Library/Logs/tempfiledeleter.log]
+        AS1 -.-> |Stderr/Errors| ErrFile[~/Library/Logs/tempfiledeleter_error.log]
+    end
+
+    subgraph "Log Maintenance Flow"
+        Agent2 --> |Executes| AS2[LogCleaner.applescript]
+        AS2 --> FindLogs[Check if logs exist in ~/Library/Logs/]
+        FindLogs --> |Found| DeleteLogs[Delete .log and _error.log]
+        DeleteLogs --> LogFinish[Log Cleanup Success]
+    end
+
+    style Agent1 fill:#f9f,stroke:#333,stroke-width:2px
+    style Agent2 fill:#bbf,stroke:#333,stroke-width:2px
+    style LogFile fill:#fff,stroke:#333,stroke-dasharray: 5 5
+    style ErrFile fill:#fff,stroke:#333,stroke-dasharray: 5 5
+```
+
 ## Technical Context
 
 - **Target Directory:** `/Users/jacquesvandermerwe/Downloads/_tmp_folder`
