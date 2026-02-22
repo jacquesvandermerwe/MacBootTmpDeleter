@@ -11,3 +11,18 @@
 
 # Temporary files
 .tmp
+.temp
+
+# IDEs
+.idea/
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+bin/
+out/
+build/
+*.iml
+*.iws
+*.ipr
