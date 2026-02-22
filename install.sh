@@ -6,12 +6,18 @@
 TEMP_PLIST="com.jacquesvdm.tempfiledeleter.plist"
 LOG_PLIST="com.jacquesvdm.logcleaner.plist"
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
+APP_SUPPORT_DIR="$HOME/Library/Application Support/MacBootTmpDeleter"
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Installing MacBootTmpDeleter..."
 
-# Create LaunchAgents directory if it doesn't exist
+# Create necessary directories
 mkdir -p "$LAUNCH_AGENTS_DIR"
+mkdir -p "$APP_SUPPORT_DIR"
+
+# Copy AppleScripts to Application Support
+cp "$PROJECT_DIR/TempFileDeleter.applescript" "$APP_SUPPORT_DIR/"
+cp "$PROJECT_DIR/LogCleaner.applescript" "$APP_SUPPORT_DIR/"
 
 # Copy both plist files to LaunchAgents
 cp "$PROJECT_DIR/$TEMP_PLIST" "$LAUNCH_AGENTS_DIR/"

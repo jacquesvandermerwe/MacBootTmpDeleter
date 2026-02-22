@@ -27,6 +27,7 @@ MacBootTmpDeleter uses AppleScript and macOS LaunchAgents to automatically:
    ```
 
 The installer will:
+- Create a directory at `~/Library/Application Support/MacBootTmpDeleter/` and copy the logic scripts there
 - Copy LaunchAgent configuration files to `~/Library/LaunchAgents/`
 - Load both the temp file deleter and log cleaner services
 - Start automatic operation
@@ -71,13 +72,7 @@ Run the uninstall script:
 ./uninstall.sh
 ```
 
-Or manually remove:
-```bash
-launchctl unload ~/Library/LaunchAgents/com.jacquesvdm.tempfiledeleter.plist
-launchctl unload ~/Library/LaunchAgents/com.jacquesvdm.logcleaner.plist
-rm ~/Library/LaunchAgents/com.jacquesvdm.tempfiledeleter.plist
-rm ~/Library/LaunchAgents/com.jacquesvdm.logcleaner.plist
-```
+This will unload the services and remove both the LaunchAgent configurations and the application scripts from `~/Library/Application Support/MacBootTmpDeleter/`.
 
 ## File Structure
 

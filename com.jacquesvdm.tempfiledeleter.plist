@@ -7,7 +7,7 @@
 	<key>ProgramArguments</key>
 	<array>
 		<string>/usr/bin/osascript</string>
-		<string>/Users/jacquesvandermerwe/Documents/eclipse_workspace/MacBootTmpDeleter/TempFileDeleter.applescript</string>
+		<string>/Users/jacquesvandermerwe/Library/Application Support/MacBootTmpDeleter/TempFileDeleter.applescript</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>

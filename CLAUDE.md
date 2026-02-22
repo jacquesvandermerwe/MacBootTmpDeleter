@@ -17,7 +17,9 @@ MacBootTmpDeleter is a macOS utility that automatically deletes temporary files 
 ## Installation and Usage
 
 1. Run the installation script: `./install.sh`
-2. The script will copy both plist files to `~/Library/LaunchAgents/` and load them
+2. The script will:
+   - Copy AppleScripts to `~/Library/Application Support/MacBootTmpDeleter/`
+   - Copy both plist files to `~/Library/LaunchAgents/` and load them
 3. The temp file deleter will run automatically on every login
 4. The log cleaner will run automatically every 7 days (weekly) starting from installation
 
@@ -35,11 +37,10 @@ The application deletes all files and folders in:
 ## Uninstalling
 
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.jacquesvdm.tempfiledeleter.plist
-launchctl unload ~/Library/LaunchAgents/com.jacquesvdm.logcleaner.plist
-rm ~/Library/LaunchAgents/com.jacquesvdm.tempfiledeleter.plist
-rm ~/Library/LaunchAgents/com.jacquesvdm.logcleaner.plist
+./uninstall.sh
 ```
+
+This unloads the services and removes the LaunchAgents and application scripts from `~/Library/Application Support/MacBootTmpDeleter/`.
 
 ## Testing
 

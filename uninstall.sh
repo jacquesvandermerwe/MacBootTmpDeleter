@@ -6,6 +6,7 @@
 TEMP_PLIST="com.jacquesvdm.tempfiledeleter.plist"
 LOG_PLIST="com.jacquesvdm.logcleaner.plist"
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
+APP_SUPPORT_DIR="$HOME/Library/Application Support/MacBootTmpDeleter"
 
 echo "Uninstalling MacBootTmpDeleter..."
 
@@ -29,6 +30,12 @@ fi
 if [ -f "$LAUNCH_AGENTS_DIR/$LOG_PLIST" ]; then
     echo "Removing log cleaner configuration..."
     rm "$LAUNCH_AGENTS_DIR/$LOG_PLIST"
+fi
+
+# Remove the scripts from Application Support
+if [ -d "$APP_SUPPORT_DIR" ]; then
+    echo "Removing application scripts..."
+    rm -rf "$APP_SUPPORT_DIR"
 fi
 
 echo "Uninstallation complete!"
